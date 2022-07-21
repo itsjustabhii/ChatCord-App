@@ -4,6 +4,7 @@ const path = require('path')
 const http = require('http')
 const socketio = require('socket.io')
 const formatMessage= require('./utils/messages')
+const compression = require('compression')
 // const createAdapter = require("@socket.io/redis-adapter").createAdapter;
 // const redis = require("redis");
 const {userJoin, getCurrentUser, userLeave, getRoomUsers} = require('./utils/users')
@@ -11,6 +12,8 @@ const {userJoin, getCurrentUser, userLeave, getRoomUsers} = require('./utils/use
 //Creating a HTTP Server
 const server = http.createServer(app)
 const io = socketio(server)
+
+app.use(compression())
 
 //Set Static Folder
 app.use(express.static(path.join(__dirname, 'public'))) //join the current directory with public folder
